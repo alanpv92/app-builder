@@ -10,11 +10,11 @@ public interface ProjectService {
 
     List<ProjectSummaryResponseDto> getUserProjects(String userId);
 
-    ProjectResponseDto getUserProjectById(String id, String userId);
+    ProjectResponseDto getUserProjectById(String projectId, String userId);
 
-    ProjectResponseDto createProject(ProjectCreationRequestDto request, String userId);
+    ProjectResponseDto createProject(ProjectCreationRequestDto projectCreationRequestDto, String userId);
 
-    ProjectResponseDto updateProject(String id, ProjectCreationRequestDto request, String userId);
+    ProjectResponseDto updateProject(String projectId, ProjectCreationRequestDto request, String userId);
 
-    void softDelete(String id, String userId);
+    void softDelete(String projectEntity, String userId);
 }

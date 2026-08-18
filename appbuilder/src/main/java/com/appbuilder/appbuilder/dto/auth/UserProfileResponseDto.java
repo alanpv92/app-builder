@@ -1,9 +1,12 @@
 package com.appbuilder.appbuilder.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@Builder
 public class UserProfileResponseDto {
     private final String id;
     private final String email;

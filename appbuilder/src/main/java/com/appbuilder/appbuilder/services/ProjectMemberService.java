@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProjectMemberService {
 
-    List<ProjectMemberEntity> getProjectMembers(String projectId,String userId);
+    List<MemberResponseDto> getProjectMembers(String projectId,String userId);
 
     MemberResponseDto inviteMember(String projectId, InviteMemberRequestDto inviteMemberRequestDto, String userId);
 

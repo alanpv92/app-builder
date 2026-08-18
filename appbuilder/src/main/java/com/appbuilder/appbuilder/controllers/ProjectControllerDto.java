@@ -21,31 +21,31 @@ public class ProjectControllerDto {
 
     @GetMapping
     public ResponseEntity<List<ProjectSummaryResponseDto>> getMyProjects() {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectService.getUserProjects(userId));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProjectResponseDto> getProjectById(@PathVariable String id) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectService.getUserProjectById(id, userId));
     }
 
     @PostMapping
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectCreationRequestDto request) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.createProject(request, userId));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<ProjectResponseDto> updateProject(@PathVariable String id, @RequestBody ProjectCreationRequestDto request) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectService.updateProject(id, request, userId));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable String id) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         projectService.softDelete(id, userId);
         return ResponseEntity.noContent().build();
     }

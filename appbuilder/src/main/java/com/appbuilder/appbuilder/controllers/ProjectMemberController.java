@@ -21,8 +21,8 @@ public class ProjectMemberController {
 
 
     @GetMapping
-    public ResponseEntity<List<ProjectMemberEntity>> getProjectMembers(@PathVariable String projectId) {
-        String userId = "1L";
+    public ResponseEntity<List<MemberResponseDto>> getProjectMembers(@PathVariable String projectId) {
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectMemberService.getProjectMembers(projectId, userId));
     }
 
@@ -31,7 +31,7 @@ public class ProjectMemberController {
             @PathVariable String projectId,
             @RequestBody InviteMemberRequestDto request
     ) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 projectMemberService.inviteMember(projectId, request, userId)
         );
@@ -43,7 +43,7 @@ public class ProjectMemberController {
             @PathVariable String memberId,
             @RequestBody UpdateMemberRoleRequestDto request
     ) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectMemberService.updateMemberRole(projectId, memberId, request, userId));
     }
 
@@ -52,7 +52,7 @@ public class ProjectMemberController {
             @PathVariable String projectId,
             @PathVariable String memberId
     ) {
-        String userId = "1L";
+        String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectMemberService.deleteProjectMember(projectId, memberId, userId));
     }
 

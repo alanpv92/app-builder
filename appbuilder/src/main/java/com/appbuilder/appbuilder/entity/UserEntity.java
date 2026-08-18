@@ -1,15 +1,27 @@
 package com.appbuilder.appbuilder.entity;
 
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Setter
 @Getter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
 public class UserEntity {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     private String email;
@@ -20,9 +32,11 @@ public class UserEntity {
 
     private String avatarUrl;
 
-    LocalDateTime createdAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    LocalDateTime updatedAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    LocalDateTime deletedAt;
+    private LocalDateTime deletedAt;
 }

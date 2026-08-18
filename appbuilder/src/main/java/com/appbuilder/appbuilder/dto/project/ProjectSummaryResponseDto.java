@@ -1,11 +1,14 @@
 package com.appbuilder.appbuilder.dto.project;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class ProjectSummaryResponseDto {
 
     private final String id;

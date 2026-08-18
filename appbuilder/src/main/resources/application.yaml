@@ -4,7 +4,7 @@ spring:
     name: appbuilder
 
   datasource:
-    url: jdbc:postgresql://localhost:5000/app-builder
+    url: jdbc:postgresql://localhost:5000/appdb
     username: user
     password: super-secret-password
     driver-class-name: org.postgresql.Driver
