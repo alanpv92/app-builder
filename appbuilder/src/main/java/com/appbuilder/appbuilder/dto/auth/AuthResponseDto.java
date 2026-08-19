@@ -1,5 +1,6 @@
 package com.appbuilder.appbuilder.dto.auth;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

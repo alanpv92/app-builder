@@ -5,6 +5,7 @@ import com.appbuilder.appbuilder.dto.member.MemberResponseDto;
 import com.appbuilder.appbuilder.dto.member.UpdateMemberRoleRequestDto;
 import com.appbuilder.appbuilder.entity.ProjectMemberEntity;
 import com.appbuilder.appbuilder.services.ProjectMemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class ProjectMemberController {
     @PostMapping
     public ResponseEntity<MemberResponseDto> inviteMember(
             @PathVariable String projectId,
-            @RequestBody InviteMemberRequestDto request
+            @RequestBody @Valid InviteMemberRequestDto request
     ) {
         String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.status(HttpStatus.CREATED).body(
@@ -41,7 +42,7 @@ public class ProjectMemberController {
     public ResponseEntity<MemberResponseDto> updateMemberRole(
             @PathVariable String projectId,
             @PathVariable String memberId,
-            @RequestBody UpdateMemberRoleRequestDto request
+            @RequestBody @Valid UpdateMemberRoleRequestDto request
     ) {
         String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectMemberService.updateMemberRole(projectId, memberId, request, userId));

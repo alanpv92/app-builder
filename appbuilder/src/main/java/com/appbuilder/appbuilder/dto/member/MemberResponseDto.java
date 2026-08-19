@@ -2,6 +2,8 @@ package com.appbuilder.appbuilder.dto.member;
 
 import com.appbuilder.appbuilder.entity.enums.ProjectRole;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.stereotype.Repository;
 
