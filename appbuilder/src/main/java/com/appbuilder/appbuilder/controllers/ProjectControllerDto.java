@@ -5,6 +5,7 @@ import com.appbuilder.appbuilder.dto.project.ProjectCreationRequestDto;
 import com.appbuilder.appbuilder.dto.project.ProjectResponseDto;
 import com.appbuilder.appbuilder.dto.project.ProjectSummaryResponseDto;
 import com.appbuilder.appbuilder.services.ProjectService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +33,13 @@ public class ProjectControllerDto {
     }
 
     @PostMapping
-    public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectCreationRequestDto request) {
+    public ResponseEntity<ProjectResponseDto> createProject(@RequestBody @Valid ProjectCreationRequestDto request) {
         String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.createProject(request, userId));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProjectResponseDto> updateProject(@PathVariable String id, @RequestBody ProjectCreationRequestDto request) {
+    public ResponseEntity<ProjectResponseDto> updateProject(@PathVariable String id, @RequestBody @Valid ProjectCreationRequestDto request) {
         String userId = "550e8400-e29b-41d4-a716-446655440000";
         return ResponseEntity.ok(projectService.updateProject(id, request, userId));
     }
