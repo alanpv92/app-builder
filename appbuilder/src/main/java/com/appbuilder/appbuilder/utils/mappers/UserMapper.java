@@ -1,5 +1,6 @@
 package com.appbuilder.appbuilder.utils.mappers;
 
+import com.appbuilder.appbuilder.dto.auth.SignupRequestDto;
 import com.appbuilder.appbuilder.dto.auth.UserProfileResponseDto;
 import com.appbuilder.appbuilder.entity.UserEntity;
 import org.springframework.stereotype.Component;
@@ -14,5 +15,13 @@ public class UserMapper {
                 .avatarUrl(userEntity.getAvatarUrl())
                 .name(userEntity.getName())
                 .build();
+    }
+
+    public UserEntity fromSignUpDto(SignupRequestDto signupRequestDto) {
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(signupRequestDto.getEmail());
+        userEntity.setPassword(signupRequestDto.getPassword());
+        userEntity.setName(signupRequestDto.getName());
+        return userEntity;
     }
 }

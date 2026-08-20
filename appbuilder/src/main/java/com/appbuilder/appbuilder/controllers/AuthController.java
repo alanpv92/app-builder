@@ -6,6 +6,7 @@ import com.appbuilder.appbuilder.dto.auth.SignupRequestDto;
 import com.appbuilder.appbuilder.dto.auth.UserProfileResponseDto;
 import com.appbuilder.appbuilder.services.AuthService;
 import com.appbuilder.appbuilder.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponseDto> signup(@RequestBody SignupRequestDto signupRequestDto) {
+    public ResponseEntity<AuthResponseDto> signup(@RequestBody @Valid SignupRequestDto signupRequestDto) {
         return ResponseEntity.ok(authService.signUp(signupRequestDto));
     }
 

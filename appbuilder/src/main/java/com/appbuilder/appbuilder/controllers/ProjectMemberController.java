@@ -5,6 +5,7 @@ import com.appbuilder.appbuilder.dto.member.MemberResponseDto;
 import com.appbuilder.appbuilder.dto.member.UpdateMemberRoleRequestDto;
 import com.appbuilder.appbuilder.entity.ProjectMemberEntity;
 import com.appbuilder.appbuilder.services.ProjectMemberService;
+import com.appbuilder.appbuilder.utils.helpers.SecurityHelper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ProjectMemberController {
 
     @GetMapping
     public ResponseEntity<List<MemberResponseDto>> getProjectMembers(@PathVariable String projectId) {
-        String userId = "550e8400-e29b-41d4-a716-446655440000";
+        String userId = SecurityHelper.getId();
         return ResponseEntity.ok(projectMemberService.getProjectMembers(projectId, userId));
     }
 
@@ -32,7 +33,7 @@ public class ProjectMemberController {
             @PathVariable String projectId,
             @RequestBody @Valid InviteMemberRequestDto request
     ) {
-        String userId = "550e8400-e29b-41d4-a716-446655440000";
+        String userId = SecurityHelper.getId();
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 projectMemberService.inviteMember(projectId, request, userId)
         );
@@ -44,7 +45,7 @@ public class ProjectMemberController {
             @PathVariable String memberId,
             @RequestBody @Valid UpdateMemberRoleRequestDto request
     ) {
-        String userId = "550e8400-e29b-41d4-a716-446655440000";
+        String userId = SecurityHelper.getId();
         return ResponseEntity.ok(projectMemberService.updateMemberRole(projectId, memberId, request, userId));
     }
 
@@ -53,7 +54,7 @@ public class ProjectMemberController {
             @PathVariable String projectId,
             @PathVariable String memberId
     ) {
-        String userId = "550e8400-e29b-41d4-a716-446655440000";
+        String userId = SecurityHelper.getId();
         return ResponseEntity.ok(projectMemberService.deleteProjectMember(projectId, memberId, userId));
     }
 
