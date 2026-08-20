@@ -17,6 +17,7 @@ public class AppbuilderApplication {
 
 check y createat and updatedAt comming null on project creation
 
+check the logic for project entity and project memeber
 
 
  */

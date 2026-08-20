@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class SignupRequestDto {
+    @NotBlank(message = "name cannot be blank")
     private final String name;
 
     @NotBlank(message = "email cannot be blank")

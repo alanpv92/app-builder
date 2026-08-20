@@ -25,5 +25,14 @@ public class ErrorMessageConstants {
 
     static public final String OWNER_CANNOT_BE_DELETED="owner cannot be deleted";
 
+    static public final String EMAIL_ALREADY_EXISTS="Email already exists";
+
+    static public final String EMAIL_NOT_FOUND="Email not found";
+
+    static public final String PASSWORD_DOES_NOT_MATCH="Password doesn't match";
+
+    static public final String JWT_TOKEN_INVALID="JWT token is invalid";
+
+    static public final String SOMETHING_WENT_WRONG="Something went wrong";
 
 }

@@ -2,8 +2,10 @@ package com.appbuilder.appbuilder.advices;
 
 
 import com.appbuilder.appbuilder.dto.api.ApiResponse;
+import com.appbuilder.appbuilder.exceptions.AuthenticatoinException;
 import com.appbuilder.appbuilder.exceptions.BadRequestException;
 import com.appbuilder.appbuilder.exceptions.ResourceNotFoundException;
+import com.appbuilder.appbuilder.utils.constants.ErrorMessageConstants;
 import org.hibernate.ResourceClosedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +33,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(error));
     }
 
+    @ExceptionHandler(AuthenticatoinException.class)
+    public ResponseEntity<ApiResponse> handleAuthenticatoinException(AuthenticatoinException ex) {
+        if(ex.getMessage().equals(ErrorMessageConstants.SOMETHING_WENT_WRONG)){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.error(ex.getMessage()));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiResponse.error(ex.getMessage()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.error(ex.getMessage()));
     }
+
+
 
 }
