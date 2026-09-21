@@ -40,20 +40,12 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     }
 
 
-
     @Override
     public List<MemberResponseDto> getProjectMembers(String projectId, String userId) {
 
-        ArrayList<MemberResponseDto> members = new ArrayList<>();
-        final ProjectEntity projectEntity= getProjectEntityForUserId(projectId,userId);
+        return projectMemberRepository.getAllProjectMemberByProjectId(projectId).stream().map( projectMemberMapper::fromProjectMemberEntity).toList();
 
-        members.add(projectMemberMapper.fromProjectMemberEntity(projectEntity));
 
-        members.addAll(projectMemberRepository.getAllProjectMemberByProjectId(projectId).stream().map(
-                projectMemberMapper::fromProjectMemberEntity
-        ).toList());
-
-       return members;
     }
 
     @Override

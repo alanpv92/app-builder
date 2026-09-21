@@ -40,8 +40,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try{
             final String authHeader = request.getHeader("Authorization");
             final String jwt;
-
-            if(request.getRequestURI().contains("/auth")){
+            final String uri = request.getRequestURI();
+            if(uri.contains("/auth")||uri.contains("webhook")){
                 filterChain.doFilter(request, response);
                 return;
             }

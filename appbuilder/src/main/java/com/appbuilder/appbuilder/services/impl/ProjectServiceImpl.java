@@ -5,10 +5,15 @@ import com.appbuilder.appbuilder.dto.project.ProjectCreationRequestDto;
 import com.appbuilder.appbuilder.dto.project.ProjectResponseDto;
 import com.appbuilder.appbuilder.dto.project.ProjectSummaryResponseDto;
 import com.appbuilder.appbuilder.entity.ProjectEntity;
+import com.appbuilder.appbuilder.entity.ProjectMemberEntity;
+import com.appbuilder.appbuilder.entity.SubscriptionEntity;
 import com.appbuilder.appbuilder.entity.UserEntity;
+import com.appbuilder.appbuilder.entity.enums.ProjectRole;
 import com.appbuilder.appbuilder.exceptions.BadRequestException;
 import com.appbuilder.appbuilder.exceptions.ResourceNotFoundException;
+import com.appbuilder.appbuilder.repository.ProjectMemberRepository;
 import com.appbuilder.appbuilder.repository.ProjectRepository;
+import com.appbuilder.appbuilder.repository.SubscriptionRepository;
 import com.appbuilder.appbuilder.repository.UserRepository;
 import com.appbuilder.appbuilder.services.ProjectService;
 import com.appbuilder.appbuilder.utils.constants.ErrorMessageConstants;
@@ -26,7 +31,9 @@ import java.util.List;
 public class ProjectServiceImpl implements ProjectService {
 
    private final ProjectRepository projectRepository;
+   private final ProjectMemberRepository projectMemberRepository;
    private final UserRepository userRepository;
+   private final SubscriptionRepository subscriptionRepository;
    private final ProjectMapper projectMapper;
    private final UserMapper userMapper;
 
@@ -59,12 +66,47 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.fromProjectEntity(projectEntity,userProfileResponseDto);
     }
 
+
+
+
+    void validateSubscription(String userId) {
+       final SubscriptionEntity subscriptionEntity= subscriptionRepository.findByUserId(userId).orElseThrow(
+               () -> new BadRequestException(ErrorMessageConstants.PROJECT_OPERATION_SUBSCRIPTION_NOT_FOUND)
+       );
+
+       if(projectRepository.findAllForUser(userId).size()>subscriptionEntity.getPlan().getMaxProjects()){
+           throw new BadRequestException(ErrorMessageConstants.PROJECT_OPERATION_LIMIT);
+       }
+    }
+
+
+
     @Transactional
     @Override
     public ProjectResponseDto createProject(ProjectCreationRequestDto projectCreationRequestDto, String userId) {
+       //creating project
+       //assign user as owner for the project
+       //also creating a project member entry
+
+
+       //before creating check if user is valid
+        // if user if vaild check if subscripton is there
+        //if subscription is active then check the lenght of projects
+
+
+
         final UserEntity user= getUserEntity(userId);
+
+        validateSubscription(userId);
+
         final ProjectEntity projectEntity = projectMapper.fromProjectCreationRequestDto(projectCreationRequestDto, user);
         final ProjectEntity savedProjectEntity =projectRepository.save(projectEntity);
+        final ProjectMemberEntity projectMemberEntity=new ProjectMemberEntity();
+        projectMemberEntity.setProjectEntity(projectEntity);
+        projectMemberEntity.setUserEntity(user);
+        projectMemberEntity.setProjectRole(ProjectRole.OWNER);
+        projectMemberEntity.setInvitedAt(LocalDateTime.now());
+        projectMemberRepository.save(projectMemberEntity);
         final UserProfileResponseDto userProfileResponseDto=userMapper.fromUserEntity(user);
         return projectMapper.fromProjectEntity(savedProjectEntity,userProfileResponseDto);
     }

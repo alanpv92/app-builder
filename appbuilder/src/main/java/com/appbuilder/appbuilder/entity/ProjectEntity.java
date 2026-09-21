@@ -27,7 +27,7 @@ public class ProjectEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false,name = "user_id")
+    @JoinColumn(nullable = false,name = "owner_id")
     private UserEntity owner;
 
     private  Boolean isPublic=false;
