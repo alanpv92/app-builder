@@ -7,7 +7,17 @@ import java.util.Objects;
 
 public class SecurityHelper {
 
+
+
+    public static  UserEntity getCurrentUser() {
+        return (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
    public static String getId(){
-       return ((UserEntity) Objects.requireNonNull(Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getPrincipal())).getId();
+       return SecurityHelper.getCurrentUser().getId();
+    }
+
+    public static String getEmail(){
+       return SecurityHelper.getCurrentUser().getEmail();
     }
 }

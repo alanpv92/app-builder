@@ -1,6 +1,7 @@
 package com.appbuilder.appbuilder.entity;
 
 
+import com.appbuilder.appbuilder.entity.enums.SystemRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +34,10 @@ public class UserEntity {
     private String name;
 
     private String avatarUrl;
+
+
+    @Enumerated(EnumType.STRING)
+    private SystemRole systemRole;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

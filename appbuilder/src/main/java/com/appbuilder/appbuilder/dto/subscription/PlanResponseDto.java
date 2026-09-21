@@ -1,9 +1,12 @@
 package com.appbuilder.appbuilder.dto.subscription;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class PlanResponseDto {
 
     private final String id;

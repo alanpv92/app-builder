@@ -35,4 +35,16 @@ public class ErrorMessageConstants {
 
     static public final String SOMETHING_WENT_WRONG="Something went wrong";
 
+    static  public final String ONLY_ADMIN_CAN_CREATE_PLAN="Only admin can create plan";
+
+    static public  final String WEB_HOOK_INTERNAL_ERROR="web hook Internal Error";
+
+    static public final String PLAN_NOT_FOUND="Plan not found";
+
+    static public final String PROJECT_OPERATION_SUBSCRIPTION_NOT_FOUND="subscription is required";
+
+    static public final String SUBSCRIPTION_EXPIRED="Subscription expired";
+
+    static public final String PROJECT_OPERATION_LIMIT="Limit of projects exceeded";
+
 }

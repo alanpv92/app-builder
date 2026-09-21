@@ -30,6 +30,7 @@ public class SecurityConfiguration {
         http.sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/api/auth/**").permitAll();
+            auth.requestMatchers("/api/billing/webhook/**").permitAll();
             auth.anyRequest().authenticated();
         });
 
